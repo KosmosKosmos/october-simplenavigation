@@ -1,0 +1,70 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    title:
+        label: Titel
+        comment: Der Titel, der im Menü angezeigt wird
+        type: text
+        required: 1
+        span: left
+    parent:
+        label: Gehört zu
+        comment: Der Menüeintrag, unter welchem die Seite gelistet ist
+        type: relation
+        nameFrom: title
+        emptyOption: Keine Menüeinträge vorhanden
+        required: 1
+        span: right
+    description:
+        label: Beschreibung
+        comment: Die Beschreibung wird nur im Backend angezeigt
+        type: textarea
+        size: small
+        required: 0
+        span: left
+    access:
+        label: Zugriff
+        commentAbove: Bestimmt, für wen die Seite zu sehen ist
+        type: radio
+        options:
+            0: [Für niemanden, Die Seite ist versteckt]
+            1: [Für alle, Jeder kann die Seite sehen]
+            2: [Für Benutzer, Nur registrierte Benutzer können diese Seite sehen]
+            3: [Für Administratoren, Nur im Backend registrierte Benutzer können die Seite sehen]
+        default: 1
+        span: right
+    order:
+        label: Position
+        comment: Die Position im Menü
+        type: number
+        required: 1
+        span: left
+    newpage:
+        label: Neue Seite
+        commentAbove: Bestimmt, ob eine neue Seite erstellt werden soll
+        type: radio
+        options:
+            0: [Vorhandene Seite verlinken, Aus den vorhandenen Seiten eine hinzufügen]
+            1: [Neue Seite erstellen, Eine komplett neue Seite wird erstellt]
+        default: 0
+    link:
+        label: Link
+        comment: Der Link, der im Browser aufgerufen wird, wenn man die Seite öffnet
+        type: dropdown
+        options: getLinks
+        required: 1
+        trigger:
+            action: show
+            field: newpage
+            condition: value[0]
+    link_new:
+        label: Link
+        comment: Der Link, der im Browser aufgerufen wird, wenn man die Seite öffnet
+        type: text
+        required: 1
+        trigger:
+            action: show
+            field: newpage
+            condition: value[1]

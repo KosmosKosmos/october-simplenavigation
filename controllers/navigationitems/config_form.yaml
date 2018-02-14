@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Navigation Item
+
+# Model Form Field configuration
+form: $/zollerboy/navigation/models/navigationitem/fields.yaml
+
+# Model Class name
+modelClass: Zollerboy\Navigation\Models\NavigationItem
+
+# Default redirect location
+defaultRedirect: zollerboy/navigation/navigationitems
+
+# Create page
+create:
+    title: Create Navigation Item
+    redirect: zollerboy/navigation/navigationitems/update/:id
+    redirectClose: zollerboy/navigation/navigationitems
+
+# Update page
+update:
+    title: Edit Navigation Item
+    redirect: zollerboy/navigation/navigationitems
+    redirectClose: zollerboy/navigation/navigationitems
+
+# Preview page
+preview:
+    title: Preview Navigation Item
