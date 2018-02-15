@@ -10,12 +10,12 @@ fields:
         required: 1
         span: left
     parent:
-        label: Gehört zu
+        label: Übergeordneter Menüeintrag
         comment: Der Menüeintrag, unter welchem die Seite gelistet ist
         type: relation
         nameFrom: title
-        emptyOption: Keine Menüeinträge vorhanden
-        required: 1
+        #emptyOption: Keine Menüeinträge vorhanden
+        required: 0
         span: right
     description:
         label: Beschreibung
@@ -35,13 +35,7 @@ fields:
             3: [Für Administratoren, Nur im Backend registrierte Benutzer können die Seite sehen]
         default: 1
         span: right
-    order:
-        label: Position
-        comment: Die Position im Menü
-        type: number
-        required: 1
-        span: left
-    newpage:
+    new_page:
         label: Neue Seite
         commentAbove: Bestimmt, ob eine neue Seite erstellt werden soll
         type: radio
@@ -49,22 +43,31 @@ fields:
             0: [Vorhandene Seite verlinken, Aus den vorhandenen Seiten eine hinzufügen]
             1: [Neue Seite erstellen, Eine komplett neue Seite wird erstellt]
         default: 0
+        context: create
     link:
         label: Link
         comment: Der Link, der im Browser aufgerufen wird, wenn man die Seite öffnet
         type: dropdown
         options: getLinks
         required: 1
+        context: create
         trigger:
             action: show
-            field: newpage
+            field: new_page
             condition: value[0]
     link_new:
         label: Link
         comment: Der Link, der im Browser aufgerufen wird, wenn man die Seite öffnet
         type: text
         required: 1
+        context: create
         trigger:
             action: show
-            field: newpage
+            field: new_page
             condition: value[1]
+    link_change:
+        label: Link ändern
+        comment: Der Link, der im Browser aufgerufen wird, wenn man die Seite öffnet
+        type: text
+        required: 1
+        context: update

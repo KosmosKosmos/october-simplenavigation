@@ -3,6 +3,22 @@
 # ===================================
 
 columns:
-    id:
-        label: ID
+    title:
+        label: Titel
+        type: text
         searchable: true
+    description:
+        label: Beschreibung
+        type: text
+    parent:
+        label: Übergeordneter Menüeintrag
+        relation: parent
+        valueFrom: title
+        default: Keiner
+    link:
+        label: Link
+        type: text
+        searchable: true
+    access:
+        label: Zugriff
+        type: number
