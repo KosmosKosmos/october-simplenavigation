@@ -1,9 +1,11 @@
 <?php namespace Zollerboy\Navigation\Models;
 
 use Model;
-use File;
-use Cms\Classes\Theme;
+
 use Cms\Classes\Page;
+use Cms\Classes\Theme;
+
+use Zollerboy\Navigation\Classes\Filesystem;
 
 /**
  * NavigationItem Model
@@ -65,8 +67,8 @@ class NavigationItem extends Model {
 
             $pageFilename = "page" . str_replace("/", "-", $this->link) . ".htm";
             $contentFilename = "content" . str_replace("/", "-", $this->link) . ".htm";
-            $pageFilepath = themes_path() . "/" . $currentThemeDirectory . "/pages/" . $pageFilename;
-            $contentFilepath = themes_path() . "/" . $currentThemeDirectory . "/content/" . $contentFilename;
+            $pageFilePath = themes_path() . "/" . $currentThemeDirectory . "/pages/" . $pageFilename;
+            $contentFilePath = themes_path() . "/" . $currentThemeDirectory . "/content/" . $contentFilename;
 
             $pageFileContents = [
                 "title = \"" . $this->title . "\"\n",
@@ -79,12 +81,8 @@ class NavigationItem extends Model {
                 "{% component 'contenteditor' file=\"" . $contentFilename . "\" %}\n"
             ];
 
-            $pageFile = fopen($pageFilepath, "w");
-            fwrite($pageFile, implode($pageFileContents));
-            fclose($pageFile);
-
-            $contentFile = fopen($contentFilepath, "w");
-            fclose($contentFile);
+            Filesystem::createFile($pageFilename, $pageFileContents);
+            Filesystem::createFile($contentFilePath);
 
         }
 
@@ -98,26 +96,22 @@ class NavigationItem extends Model {
 
         $pageFilename = "page" . str_replace("/", "-", $this->link) . ".htm";
         $contentFilename = "content" . str_replace("/", "-", $this->link) . ".htm";
-        $pageFilepath = themes_path() . "/" . $currentThemeDirectory . "/pages/" . $pageFilename;
-        $contentFilepath = themes_path() . "/" . $currentThemeDirectory . "/content/" . $contentFilename;
+        $pageFilePath = themes_path() . "/" . $currentThemeDirectory . "/pages/" . $pageFilename;
+        $contentFilePath = themes_path() . "/" . $currentThemeDirectory . "/content/" . $contentFilename;
 
         $newPageFilename = "page" . str_replace("/", "-", $this->link_change) . ".htm";
         $newContentFilename = "content" . str_replace("/", "-", $this->link_change) . ".htm";
-        $newPageFilepath = themes_path() . "/" . $currentThemeDirectory . "/pages/" . $newPageFilename;
-        $newContentFilepath = themes_path() . "/" . $currentThemeDirectory . "/content/" . $newContentFilename;
+        $newPageFilePath = themes_path() . "/" . $currentThemeDirectory . "/pages/" . $newPageFilename;
+        $newContentFilePath = themes_path() . "/" . $currentThemeDirectory . "/content/" . $newContentFilename;
 
-        rename($pageFilepath, $newPageFilepath);
-        rename($contentFilepath, $newContentFilepath);
+        $newPageReplaceRegex = [
+            "/title = \"[\w \-]+\"/" => "title = \"" . $this->title . "\"",
+            "/url = \"[a-z\.\-\/]+\"/" => "url = \"" . $this->link_change . "\"",
+            "/\{% component 'contenteditor' file=\"[a-z\.\-]+\" %\}/" => "/\{% component 'contenteditor' file=\"" . $newContentFilename . "\" %\}/"
+        ];
 
-        $newPageFileContents = file($newPageFilepath);
-        $newPageFileContents[0] = "title = \"" . $this->title . "\"\n";
-        $newPageFileContents[1] = "url = \"" . $this->link_change . "\"\n";
-        $newPageFileContents[count($newPageFileContents) - 1] = "{% component 'contenteditor' file=\"" . $newContentFilename . "\" %}\n";
-
-        $pageFile = fopen($newPageFilepath, "w");
-        fwrite($pageFile, implode($newPageFileContents));
-        fclose($pageFile);
-
+        Filesystem::updateFile($pageFilePath, $newPageFilePath, $newPageReplaceRegex);
+        Filesystem::updateFile($contentFilePath, $newContentFilePath);
 
         $this->link = $this->link_change;
         unset($this->link_change);
