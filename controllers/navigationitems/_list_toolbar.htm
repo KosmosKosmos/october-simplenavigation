@@ -8,14 +8,44 @@
     <button
         class="btn btn-danger oc-icon-trash-o"
         disabled="disabled"
-        onclick="$(this).data('request-data', { checked: $('.control-list').listWidget('getChecked') })"
+        onclick="$(this).data('request-data', { checked: $('.control-list').listWidget('getChecked'), deleteSites: window.deleteSites })"
         data-request="onDelete"
-        data-request-confirm="Are you sure you want to delete the selected Navigation Items?"
+        data-request-confirm="Möchtest Du zusätzlich zu den ausgewählten Menüeinträgen auch die Seite löschen?"
         data-trigger-action="enable"
         data-trigger=".control-list input[type=checkbox]"
         data-trigger-condition="checked"
         data-request-success="$(this).prop('disabled', 'disabled')"
         data-stripe-load-indicator>
-        Delete selected
+        Ausgewählte Menüeinträge löschen
     </button>
+    <script type="application/javascript">
+        $(document).on('ajaxConfirmMessage', function(event, message) {
+
+            event.preventDefault();
+            $('<p>' + message + '</p>').dialog({
+                resizable: false,
+                height: "auto",
+                width: 400,
+                modal: true,
+                buttons: {
+                    "Abbrechen": function () {
+                        event.promise.reject();
+                        $(this).dialog("close");
+                    },
+                    "Nur Einträge löschen": function () {
+                        window.deleteSites = false;
+                        event.promise.resolve();
+                        $(this).dialog("close");
+                    },
+                    "Auch die Seite löschen": function () {
+                        window.deleteSites = true;
+                        event.promise.resolve();
+                        $(this).dialog("close");
+                    }
+                }
+            });
+
+            return true;
+        });
+    </script>
 </div>

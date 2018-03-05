@@ -123,6 +123,10 @@ class NavigationItem extends Model {
         unset($this->link_change);
     }
 
+    public function beforeDelete() {
+        var_dump(post());
+    }
+
     public function getLinks($fieldName, $value, $formData) {
 
         $links = array();

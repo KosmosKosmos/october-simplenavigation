@@ -1,7 +1,9 @@
 <?php namespace Zollerboy\Navigation;
 
-use Backend;
 use System\Classes\PluginBase;
+use Backend;
+use App;
+use Event;
 
 /**
  * Navigation Plugin Information File
@@ -40,7 +42,16 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
+        if (!App::runningInBackend()) {
+            return;
+        }
 
+        Event::listen('backend.page.beforeDisplay', function($controller, $action, $params) {
+            if (get_class($controller) === 'Zollerboy\Navigation\Controllers\NavigationItems') {
+                $controller->addCss('/plugins/zollerboy/navigation/assets/css/jquery-ui.min.css');
+                $controller->addJs('/plugins/zollerboy/navigation/assets/css/jquery-ui.min.js');
+            }
+        });
     }
 
     /**
