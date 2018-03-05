@@ -9,7 +9,7 @@ list: $/zollerboy/navigation/models/navigationitem/columns.yaml
 modelClass: Zollerboy\Navigation\Models\NavigationItem
 
 # List Title
-title: Manage Navigation Items
+title: Navigation bearbeiten
 
 # Link URL for each record
 recordUrl: zollerboy/navigation/navigationitems/update/:id
@@ -18,7 +18,7 @@ recordUrl: zollerboy/navigation/navigationitems/update/:id
 noRecordsMessage: backend::lang.list.no_records
 
 # Records to display per page
-recordsPerPage: 20
+recordsPerPage: 50
 
 # Display page numbers with pagination, disable to improve performance
 showPageNumbers: true

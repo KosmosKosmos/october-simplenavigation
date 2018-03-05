@@ -3,7 +3,7 @@
 # ===================================
 
 # Record name
-name: Navigation Item
+name: Menüeintrag
 
 # Model Form Field configuration
 form: $/zollerboy/navigation/models/navigationitem/fields.yaml
@@ -16,16 +16,16 @@ defaultRedirect: zollerboy/navigation/navigationitems
 
 # Create page
 create:
-    title: Create Navigation Item
+    title: Menüeintrag erstellen
     redirect: zollerboy/navigation/navigationitems/update/:id
     redirectClose: zollerboy/navigation/navigationitems
 
 # Update page
 update:
-    title: Edit Navigation Item
+    title: Menüeintrag bearbeiten
     redirect: zollerboy/navigation/navigationitems
     redirectClose: zollerboy/navigation/navigationitems
 
 # Preview page
 preview:
-    title: Preview Navigation Item
+    title: Vorschau
