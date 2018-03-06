@@ -49,7 +49,7 @@ class Plugin extends PluginBase
         Event::listen('backend.page.beforeDisplay', function($controller, $action, $params) {
             if (get_class($controller) === 'Zollerboy\Navigation\Controllers\NavigationItems') {
                 $controller->addCss('/plugins/zollerboy/navigation/assets/css/jquery-ui.min.css');
-                $controller->addJs('/plugins/zollerboy/navigation/assets/css/jquery-ui.min.js');
+                $controller->addJs('/plugins/zollerboy/navigation/assets/javascript/jquery-ui.min.js');
             }
         });
     }
