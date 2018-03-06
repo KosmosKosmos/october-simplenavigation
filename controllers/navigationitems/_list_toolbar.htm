@@ -19,9 +19,7 @@
         Ausgewählte Menüeinträge löschen
     </button>
     <script type="application/javascript">
-        $(document).on('ajaxConfirmMessage', function(event, message) {
-
-            event.preventDefault();
+        $(window).on('ajaxConfirmMessage', function(event, message) {
             $('<p>' + message + '</p>').dialog({
                 resizable: false,
                 height: "auto",
@@ -44,6 +42,8 @@
                     }
                 }
             });
+
+            event.preventDefault();
 
             return true;
         });
