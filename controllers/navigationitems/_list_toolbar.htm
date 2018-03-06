@@ -20,6 +20,8 @@
     </button>
     <script type="application/javascript">
         $(window).on('ajaxConfirmMessage', function(event, message) {
+
+            event.preventDefault();
             $('<p>' + message + '</p>').dialog({
                 resizable: false,
                 height: "auto",
@@ -42,8 +44,6 @@
                     }
                 }
             });
-
-            event.preventDefault();
 
             return true;
         });
