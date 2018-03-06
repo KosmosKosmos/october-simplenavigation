@@ -25,22 +25,22 @@
             $('<p>' + message + '</p>').dialog({
                 resizable: false,
                 height: "auto",
-                width: 400,
+                width: 500,
                 modal: true,
                 buttons: {
                     "Abbrechen": function () {
-                        event.promise.reject();
                         $(this).dialog("close");
+                        event.promise.reject();
                     },
                     "Nur Einträge löschen": function () {
                         window.deleteSites = false;
-                        event.promise.resolve();
                         $(this).dialog("close");
+                        event.promise.resolve();
                     },
                     "Auch die Seite löschen": function () {
                         window.deleteSites = true;
-                        event.promise.resolve();
                         $(this).dialog("close");
+                        event.promise.resolve();
                     }
                 }
             });

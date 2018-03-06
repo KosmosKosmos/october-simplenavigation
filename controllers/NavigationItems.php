@@ -21,5 +21,8 @@ class NavigationItems extends Controller
         parent::__construct();
 
         BackendMenu::setContext('Zollerboy.Navigation', 'navigation', 'navigationitems');
+
+        $this->addCss('/plugins/zollerboy/navigation/assets/css/jquery-ui.min.css');
+        $this->addJs('/plugins/zollerboy/navigation/assets/javascript/jquery-ui.min.js');
     }
 }

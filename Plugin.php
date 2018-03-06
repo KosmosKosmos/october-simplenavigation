@@ -42,7 +42,7 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
-        if (!App::runningInBackend()) {
+        /*if (!App::runningInBackend()) {
             return;
         }
 
@@ -51,7 +51,7 @@ class Plugin extends PluginBase
                 $controller->addCss('/plugins/zollerboy/navigation/assets/css/jquery-ui.min.css');
                 $controller->addJs('/plugins/zollerboy/navigation/assets/javascript/jquery-ui.min.js');
             }
-        });
+        });*/
     }
 
     /**
