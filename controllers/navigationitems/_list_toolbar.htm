@@ -42,6 +42,9 @@
                         $(this).dialog("close");
                         event.promise.resolve();
                     }
+                },
+                open: function (event, ui) {
+                    $(this).parent('div').find('button:contains("Auch die Seite löschen")').focus();
                 }
             });
 
