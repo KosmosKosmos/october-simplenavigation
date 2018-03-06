@@ -20,7 +20,7 @@
     </button>
     <script type="application/javascript">
         $(window).on('ajaxConfirmMessage', function(event, message) {
-
+            console.log(event.cancelable);
             event.preventDefault();
             $('<p>' + message + '</p>').dialog({
                 resizable: false,
@@ -30,17 +30,17 @@
                 buttons: {
                     "Abbrechen": function () {
                         $(this).dialog("close");
-                        event.promise.reject();
+                        event.promise().reject();
                     },
                     "Nur Einträge löschen": function () {
                         window.deleteSites = false;
                         $(this).dialog("close");
-                        event.promise.resolve();
+                        event.promise().resolve();
                     },
                     "Auch die Seite löschen": function () {
                         window.deleteSites = true;
                         $(this).dialog("close");
-                        event.promise.resolve();
+                        event.promise().resolve();
                     }
                 },
                 open: function (event, ui) {
