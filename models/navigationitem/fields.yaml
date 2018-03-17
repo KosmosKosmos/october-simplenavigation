@@ -14,7 +14,7 @@ fields:
         comment: Der Menüeintrag, unter welchem die Seite gelistet ist
         type: relation
         nameFrom: title
-        #emptyOption: Keine Menüeinträge vorhanden
+        emptyOption: Keiner
         required: 0
         span: right
     description:

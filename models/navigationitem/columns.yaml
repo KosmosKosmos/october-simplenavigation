@@ -14,7 +14,7 @@ columns:
         label: Übergeordneter Menüeintrag
         relation: parent
         valueFrom: title
-        default: Keiner
+        default: -
     link:
         label: Link
         type: text
